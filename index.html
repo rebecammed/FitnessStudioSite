@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Fitness studio with classes, trainers and flexible memberships"
+    />
+    <!-- CHANGE AS ACCORDED IN MEETING: description and title -->
+    <title>PULSO Studio — Train with a purpose</title>
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- ============ HEADER / NAV ============ -->
+    <!-- to be determined -->
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation menu">
+        <a href="#hero" class="nav-logo">PULSO</a>
+
+        <ul class="nav-list">
+          <li><a href="#schedule" class="nav-link">Classes</a></li>
+          <li><a href="#trainers" class="nav-link">Trainers</a></li>
+          <li><a href="#pricing" class="nav-link">Prices</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <a href="#pricing" class="btn btn--primary nav-cta">Bookings</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ HERO ============ -->
+      <!-- to be determined -->
+      <section id="hero" class="hero">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Train with purpose. Move with your community.
+          </h1>
+          <p class="hero-subtitle">
+            Classes, trainers and plans to fit training into your life.
+          </p>
+          <div class="hero-actions">
+            <a href="#schedule" class="btn btn--primary">See schedule</a>
+            <a href="#pricing" class="btn btn--secondary">See memberships</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ABOUT THE STUDIO ============ -->
+      <!-- to be determined -->
+      <section id="about" class="about">
+        <header class="section-header">
+          <h2 class="section-title">A studio, three commitments</h2>
+          <p class="section-subtitle">
+            What sets us apart isn't the equipment. It's how we train with you.
+          </p>
+        </header>
+
+        <ul class="about-values">
+          <li class="value-card">
+            <h3 class="value-card-title">Personalised training</h3>
+            <p class="value-card-text">Small groups and real follow-up.</p>
+          </li>
+          <li class="value-card">
+            <h3 class="value-card-title">Real community</h3>
+            <p class="value-card-text">
+              People who know each other and push each other.
+            </p>
+          </li>
+          <li class="value-card">
+            <h3 class="value-card-title">Flexible schedule</h3>
+            <p class="value-card-text">
+              Classes from 6:00 to 22:00, every day.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ============ SCHEDULE ============ -->
+      <!-- to be determined -->
+      <section id="schedule" class="schedule">
+        <header class="section-header">
+          <h2 class="section-title">Class schedule</h2>
+          <p class="section-subtitle">Pick a day and book your spot.</p>
+        </header>
+
+        <!-- Day tabs (functionality with CSS or minimal JS) -->
+        <div class="schedule-tabs" role="tablist" aria-label="Days of the week">
+          <button
+            class="schedule-tab is-active"
+            role="tab"
+            aria-selected="true"
+          >
+            Monday
+          </button>
+          <button class="schedule-tab" role="tab" aria-selected="false">
+            Tuesday
+          </button>
+          <button class="schedule-tab" role="tab" aria-selected="false">
+            Wednesday
+          </button>
+          <button class="schedule-tab" role="tab" aria-selected="false">
+            Thursday
+          </button>
+          <button class="schedule-tab" role="tab" aria-selected="false">
+            Friday
+          </button>
+          <button class="schedule-tab" role="tab" aria-selected="false">
+            Saturday
+          </button>
+        </div>
+
+        <div class="schedule-grid">
+          <!-- Placeholder: one row per class -->
+          <article class="class-row">
+            <time class="class-row-time">07:00</time>
+            <h3 class="class-row-name">HIIT</h3>
+            <p class="class-row-trainer">Marta R.</p>
+            <p class="class-row-level">Intermediate</p>
+            <a href="#contact" class="btn btn--small">Book</a>
+          </article>
+          <article class="class-row">
+            <time class="class-row-time">09:00</time>
+            <h3 class="class-row-name">Yoga</h3>
+            <p class="class-row-trainer">Nerea P.</p>
+            <p class="class-row-level">All levels</p>
+            <a href="#contact" class="btn btn--small">Book</a>
+          </article>
+          <article class="class-row">
+            <time class="class-row-time">18:00</time>
+            <h3 class="class-row-name">Strength</h3>
+            <p class="class-row-trainer">Diego L.</p>
+            <p class="class-row-level">Advanced</p>
+            <a href="#contact" class="btn btn--small">Book</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ TRAINERS ============ -->
+      <!-- to be determined -->
+      <section id="trainers" class="trainers">
+        <header class="section-header">
+          <h2 class="section-title">Our team</h2>
+          <p class="section-subtitle">Trainers who know you by name.</p>
+        </header>
+
+        <div class="trainers-grid">
+          <article class="trainer-card">
+            <div class="trainer-card-photo" aria-hidden="true"></div>
+            <h3 class="trainer-card-name">Marta R.</h3>
+            <p class="trainer-card-specialty">HIIT</p>
+            <p class="trainer-card-bio">
+              High-intensity and mobility specialist.
+            </p>
+          </article>
+          <article class="trainer-card">
+            <div class="trainer-card-photo" aria-hidden="true"></div>
+            <h3 class="trainer-card-name">Diego L.</h3>
+            <p class="trainer-card-specialty">Strength</p>
+            <p class="trainer-card-bio">
+              Functional strength and lifting technique.
+            </p>
+          </article>
+          <article class="trainer-card">
+            <div class="trainer-card-photo" aria-hidden="true"></div>
+            <h3 class="trainer-card-name">Nerea P.</h3>
+            <p class="trainer-card-specialty">Yoga</p>
+            <p class="trainer-card-bio">
+              Dynamic yoga and conscious breathing.
+            </p>
+          </article>
+          <article class="trainer-card">
+            <div class="trainer-card-photo" aria-hidden="true"></div>
+            <h3 class="trainer-card-name">Iván S.</h3>
+            <p class="trainer-card-specialty">Cycling</p>
+            <p class="trainer-card-bio">
+              Rhythm, endurance and a great playlist.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ MEMBERSHIPS ============ -->
+      <!-- to be determined -->
+      <section id="pricing" class="pricing">
+        <header class="section-header">
+          <h2 class="section-title">Memberships</h2>
+          <p class="section-subtitle">No commitment. Cancel anytime.</p>
+        </header>
+
+        <div class="pricing-grid">
+          <article class="price-card">
+            <h3 class="price-card-name">Basic</h3>
+            <p class="price-card-price"><span>29</span>€/month</p>
+            <ul class="price-card-features">
+              <li>Group classes in off-peak hours</li>
+              <li>App access</li>
+            </ul>
+            <a href="#contact" class="btn btn--secondary">Choose Basic</a>
+          </article>
+
+          <article class="price-card price-card--featured">
+            <p class="price-card-badge">Most popular</p>
+            <h3 class="price-card-name">Pro</h3>
+            <p class="price-card-price"><span>49</span>€/month</p>
+            <ul class="price-card-features">
+              <li>Full access to all classes</li>
+              <li>1 personal session per month</li>
+              <li>App access</li>
+            </ul>
+            <a href="#contact" class="btn btn--primary">Choose Pro</a>
+          </article>
+
+          <article class="price-card">
+            <h3 class="price-card-name">Premium</h3>
+            <p class="price-card-price"><span>79</span>€/month</p>
+            <ul class="price-card-features">
+              <li>Everything in Pro</li>
+              <li>Assigned trainer</li>
+              <li>Nutrition plan</li>
+            </ul>
+            <a href="#contact" class="btn btn--secondary">Choose Premium</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <!-- to be determined -->
+      <section id="contact" class="contact">
+        <header class="section-header">
+          <h2 class="section-title">Come meet us</h2>
+          <p class="section-subtitle">First class free. No commitment.</p>
+        </header>
+
+        <form class="contact-form" action="#" method="post">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+
+          <button type="submit" class="btn btn--primary">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <!-- to be determined -->
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-block">
+          <h2 class="footer-title">PULSO Studio</h2>
+          <p>123 Example Street, Madrid</p>
+        </div>
+        <div class="footer-block">
+          <h3 class="footer-subtitle">Opening hours</h3>
+          <p>Mon–Fri: 6:00–22:00</p>
+          <p>Sat–Sun: 8:00–20:00</p>
+        </div>
+        <div class="footer-block">
+          <h3 class="footer-subtitle">Follow us</h3>
+          <ul class="footer-social">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-legal">© 2026 PULSO Studio. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
