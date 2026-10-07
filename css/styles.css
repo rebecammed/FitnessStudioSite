@@ -1,0 +1,614 @@
+/* ============================================
+   RESET / BASE
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* offset for sticky header on anchor links */
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ============================================
+   LAYOUT HELPERS
+   ============================================ */
+
+section {
+  padding: var(--space-6) var(--space-3);
+}
+
+.section-header {
+  max-width: 640px;
+  margin: 0 auto var(--space-6);
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  margin-bottom: var(--space-2);
+}
+
+.section-subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  text-align: center;
+  transition:
+    transform var(--transition),
+    opacity var(--transition);
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-text);
+}
+
+.btn--small {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--fs-small);
+}
+
+/* ============================================
+   HEADER / NAV
+   ============================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 100;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  order: 3;
+  width: 100%;
+  justify-content: center;
+}
+
+.nav-link {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--color-text-muted);
+}
+
+.nav-cta {
+  font-size: var(--fs-small);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+.hero {
+  background-color: var(--color-bg-alt);
+  text-align: center;
+  padding: var(--space-7) var(--space-3);
+}
+
+.hero-content {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+}
+
+.hero-subtitle {
+  color: var(--color-text-muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: stretch;
+}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+
+.about-values {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.value-card {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+}
+
+.value-card-title {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-2);
+}
+
+.value-card-text {
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+
+/* ============================================
+   SCHEDULE
+   ============================================ */
+
+.schedule-tabs {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* iOS slow scroll */
+  touch-action: pan-x pan-y; /* allow tactile scrolling gesture */
+  scrollbar-width: none; /* hide scrollbar in Firefox */
+  padding-bottom: var(--space-2);
+  max-width: var(--max-width);
+  margin: 0 auto var(--space-4);
+}
+
+.schedule-tabs::-webkit-scrollbar {
+  display: none; /* hide scrollbar in Chrome/Safari */
+}
+
+.schedule-tab {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.schedule-tab.is-active {
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.schedule-grid {
+  display: grid;
+  gap: var(--space-3);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.class-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "time   time"
+    "name   name"
+    "trainer level"
+    "btn    btn";
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  align-items: center;
+}
+
+.class-row-time {
+  grid-area: time;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+
+.class-row-name {
+  grid-area: name;
+  font-size: var(--fs-h3);
+}
+
+.class-row-trainer {
+  grid-area: trainer;
+  font-size: var(--fs-small);
+}
+
+.class-row-level {
+  grid-area: level;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.class-row .btn {
+  grid-area: btn;
+}
+
+/* ============================================
+   TRAINERS
+   ============================================ */
+
+.trainers-grid {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.trainer-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.trainer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.trainer-card-photo {
+  aspect-ratio: 1 / 1;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+}
+
+.trainer-card-name {
+  font-size: var(--fs-h3);
+}
+
+.trainer-card-specialty {
+  display: inline-block;
+  align-self: flex-start;
+  padding: var(--space-1) var(--space-2);
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+}
+
+.trainer-card-bio {
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+
+/* ============================================
+   PRICING
+   ============================================ */
+
+.pricing-grid {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.price-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+  position: relative;
+}
+
+.price-card--featured {
+  border: 2px solid var(--color-text);
+}
+
+.price-card-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.price-card-name {
+  font-size: var(--fs-h3);
+}
+
+.price-card-price {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.price-card-price span {
+  font-size: 2.5rem;
+}
+
+.price-card-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  flex-grow: 1;
+}
+
+.price-card-features li::before {
+  content: "✓ ";
+  color: var(--color-text);
+  font-weight: 700;
+  margin-right: var(--space-1);
+}
+
+/* ============================================
+   CONTACT
+   ============================================ */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.contact-form label {
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.contact-form .btn {
+  margin-top: var(--space-2);
+  align-self: flex-start;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.site-footer {
+  background-color: var(--color-bg-alt);
+  padding: var(--space-6) var(--space-3) var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.footer-grid {
+  display: grid;
+  gap: var(--space-5);
+  max-width: var(--max-width);
+  margin: 0 auto var(--space-5);
+}
+
+.footer-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-2);
+}
+
+.footer-subtitle {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-2);
+}
+
+.footer-block p {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--fs-small);
+}
+
+.footer-social a {
+  color: var(--color-text-muted);
+  transition: color var(--transition);
+}
+
+.footer-social a:hover {
+  color: var(--color-text);
+}
+
+.footer-legal {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ============================================
+   RESPONSIVE — TABLET (min-width: 768px)
+   ============================================ */
+
+@media (min-width: 768px) {
+  :root {
+    --fs-h1: 3.5rem;
+    --fs-h2: 2.5rem;
+  }
+
+  section {
+    padding: var(--space-7) var(--space-4);
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-values {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .schedule-grid {
+    gap: var(--space-2);
+  }
+
+  .class-row {
+    grid-template-columns: 80px 2fr 1fr 1fr auto;
+    grid-template-areas: "time name trainer level btn";
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .class-row-level {
+    text-align: left;
+  }
+
+  .trainers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+
+  .price-card--featured {
+    transform: scale(1.03);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-legal {
+    text-align: left;
+  }
+}
+
+/* ============================================
+   RESPONSIVE — DESKTOP (min-width: 1024px)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  .nav {
+    flex-wrap: nowrap;
+  }
+
+  .nav-list {
+    order: 0;
+    width: auto;
+  }
+
+  .trainers-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
