@@ -7,6 +7,7 @@ Static landing page for a fitness studio. Built with plain HTML5 and CSS3.
   - After the group meeting, update the studio name in the "About" section.
   - Fill the "Tech decisions" once the CSS is finished.
   - Add screenshots for Monday's presentation.
+  - Activate GitHub Pages
 -->
 
 ## About
@@ -32,12 +33,11 @@ but every line of code in this repository is written by me.
 1. Clone the repository and open `index.html` in any modern browser.
 
 ```bash
-git clone https://github.com/tu-usuario/fitness-studio-site.git
+git clone https://github.com/rebecammed/FitnessStudioSite.git
 cd fitness-studio-site
 ```
 
-2. Open `index.html` in a browser, or use a local server:
-3. Then double-click `index.html`, or right-click it and choose "Open with" →
+2. Open `index.html` in a browser or right-click it and choose "Open with" →
    your browser.
 
 ## Tech stack
@@ -68,16 +68,17 @@ cd fitness-studio-site
 4. Class schedule
 5. Trainers
 6. Membership tiers
-7. Testimonials
-8. Contact
-9. Footer
+7. Contact
+8. Footer
 
 ## Tech decisions
 
 <!-- Fill out when the CSS is finished -->
 
-- **CSS Grid** used for: _[pending]_
-- **Flexbox** used for: _[pending]_
+- **CSS Grid** used for: about values grid, schedule rows, trainers grid,
+  pricing grid, footer grid
+- **Flexbox** used for: navbar alignment, hero action buttons, card internals
+  (trainer cards, price cards), contact form, footer social links
 - **Design tokens** live in `css/variables.css` so the shared look with the
   group can be adjusted in one place
 - **Mobile-first** approach: base styles target small screens, media queries
@@ -92,6 +93,7 @@ cd fitness-studio-site
 - Single `<h1>` per page
 - Form labels associated with inputs via `for` / `id`
 - Navigation links use real anchors to section IDs
+- Focus styles for form fields (`:focus` with visible outline)
 
 ## What I would improve with more time
 
@@ -100,11 +102,12 @@ cd fitness-studio-site
 - [ ] Add real photography and testimonials
 - [ ] Add a working contact form backend
 - [ ] Add keyboard navigation for the schedule tabs
+- [ ] Deploy with GitHub Pages for a live preview link
 
 ## Author
 
 Rebeca Martínez Medina
-[(https://github.com/rebecammed)]
+[github.com/rebecammed](https://github.com/rebecammed)
 
 ## License
 
