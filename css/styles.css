@@ -496,14 +496,13 @@ section {
 
 .footer-grid {
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-5);
   max-width: var(--max-width);
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--space-5);
   padding-right: var(--space-3);
   padding-bottom: var(--space-5);
-  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
 }
 .footer-block {
@@ -647,5 +646,9 @@ section {
 
   .trainers-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
