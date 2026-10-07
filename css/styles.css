@@ -237,22 +237,15 @@ section {
 
 .schedule-tabs {
   display: flex;
-  gap: var(--space-2);
+  gap: var(--space-3);
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* iOS slow scroll */
-  touch-action: pan-x pan-y; /* allow tactile scrolling gesture */
-  scrollbar-width: none; /* hide scrollbar in Firefox */
   padding-bottom: var(--space-2);
   max-width: var(--max-width);
   margin: 0 auto var(--space-4);
 }
 
-.schedule-tabs::-webkit-scrollbar {
-  display: none; /* hide scrollbar in Chrome/Safari */
-}
-
 .schedule-tab {
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-2) var(--space-2);
   border-radius: var(--radius-sm);
   font-size: var(--fs-small);
   font-weight: 500;
