@@ -71,6 +71,25 @@ section {
   font-size: var(--fs-h2);
   line-height: var(--lh-tight);
   margin-bottom: var(--space-2);
+  /* CHANGED: decorative underline with secondary accent */
+  position: relative;
+  display: inline-block;
+}
+
+/* CHANGED: decorative underline using the secondary accent */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background-color: var(--color-accent-2);
+  margin: var(--space-2) auto 0;
+  border-radius: 2px;
+}
+
+/* Fix: when section-title is inline-block, the header must center it */
+.section-header {
+  text-align: center;
 }
 
 .section-subtitle {
@@ -91,8 +110,11 @@ section {
   text-align: center;
   transition:
     transform var(--transition),
-    opacity var(--transition);
+    background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition);
   cursor: pointer;
+  border: 2px solid transparent;
 }
 
 .btn:hover {
@@ -104,10 +126,23 @@ section {
   color: var(--color-accent-text);
 }
 
+/* CHANGED: primary hover switches to the secondary accent */
+.btn--primary:hover {
+  background-color: var(--color-accent-2);
+  color: var(--color-accent-2-text);
+}
+
 .btn--secondary {
   background-color: transparent;
   color: var(--color-text);
   border: 2px solid var(--color-text);
+}
+
+/* CHANGED: secondary hover fills with the secondary accent */
+.btn--secondary:hover {
+  background-color: var(--color-accent-2);
+  color: var(--color-accent-2-text);
+  border-color: var(--color-accent-2);
 }
 
 .btn--small {
@@ -160,8 +195,9 @@ section {
   transition: color var(--transition);
 }
 
+/* CHANGED: hover uses the secondary accent */
 .nav-link:hover {
-  color: var(--color-text-muted);
+  color: var(--color-accent-2);
 }
 
 .nav-cta {
@@ -256,6 +292,12 @@ section {
     color var(--transition);
 }
 
+/* CHANGED: hover state for non-active tabs */
+.schedule-tab:hover:not(.is-active) {
+  background-color: var(--color-bg-alt);
+  color: var(--color-text);
+}
+
 .schedule-tab.is-active {
   background-color: var(--color-accent);
   color: var(--color-accent-text);
@@ -333,12 +375,15 @@ section {
   background-color: var(--color-bg);
   transition:
     transform var(--transition),
-    box-shadow var(--transition);
+    box-shadow var(--transition),
+    border-color var(--transition);
 }
 
 .trainer-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
+  /* CHANGED: hover border uses the secondary accent */
+  border-color: var(--color-accent-2);
 }
 
 .trainer-card-photo {
@@ -388,10 +433,24 @@ section {
   border-radius: var(--radius);
   background-color: var(--color-bg);
   position: relative;
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
 }
 
+/* CHANGED: subtle hover on all price cards */
+.price-card:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+/* CHANGED: featured card border uses the primary accent */
 .price-card--featured {
-  border: 2px solid var(--color-text);
+  border: 2px solid var(--color-accent);
+}
+
+/* CHANGED: featured card hover keeps the accent border */
+.price-card--featured:hover {
+  box-shadow: var(--shadow-md);
 }
 
 .price-card-badge {
@@ -432,9 +491,10 @@ section {
   flex-grow: 1;
 }
 
+/* CHANGED: checkmarks use the secondary accent */
 .price-card-features li::before {
   content: "✓ ";
-  color: var(--color-text);
+  color: var(--color-accent-2);
   font-weight: 700;
   margin-right: var(--space-1);
 }
@@ -463,12 +523,17 @@ section {
   border-radius: var(--radius-sm);
   font: inherit;
   background-color: var(--color-bg);
+  transition:
+    border-color var(--transition),
+    outline-color var(--transition);
 }
 
+/* CHANGED: focus uses the secondary accent (better contrast on white) */
 .contact-form input:focus,
 .contact-form textarea:focus {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent-2);
   outline-offset: 1px;
+  border-color: var(--color-accent-2);
 }
 
 .contact-form .btn {
@@ -493,11 +558,10 @@ section {
   max-width: var(--max-width);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--space-5);
+  padding-left: var(--space-3);
   padding-right: var(--space-3);
-  padding-bottom: var(--space-5);
-  justify-content: center;
 }
+
 .footer-block {
   text-align: center;
 }
@@ -530,8 +594,9 @@ section {
   transition: color var(--transition);
 }
 
+/* CHANGED: hover uses the secondary accent */
 .footer-social a:hover {
-  color: var(--color-text);
+  color: var(--color-accent-2);
 }
 
 .footer-legal {
@@ -552,9 +617,6 @@ section {
    ============================================ */
 
 @media (min-width: 768px) {
-  body {
-    overflow-x: hidden;
-  }
   :root {
     --fs-h1: 3.5rem;
     --fs-h2: 2.5rem;
@@ -571,15 +633,19 @@ section {
   }
 
   .about-values {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .schedule-grid {
     gap: var(--space-2);
   }
 
+  /* CHANGED: use minmax(0, 1fr) for consistency */
   .class-row {
-    grid-template-columns: 80px 2fr 1fr 1fr auto;
+    grid-template-columns: 80px minmax(0, 2fr) minmax(0, 1fr) minmax(
+        0,
+        1fr
+      ) auto;
     grid-template-areas: "time name trainer level btn";
     padding: var(--space-3) var(--space-4);
   }
@@ -589,11 +655,11 @@ section {
   }
 
   .trainers-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .pricing-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: start;
   }
 
@@ -604,16 +670,14 @@ section {
     line-height: 1;
   }
 
-  .site-footer {
+  /* CHANGED: removed padding lateral from .site-footer (already on children) */
+
+  .footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     padding-left: var(--space-4);
     padding-right: var(--space-4);
   }
 
-  .footer-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .footer-grid,
   .footer-legal {
     padding-left: var(--space-4);
     padding-right: var(--space-4);
@@ -625,9 +689,6 @@ section {
    ============================================ */
 
 @media (min-width: 1024px) {
-  body {
-    overflow-x: hidden;
-  }
   .nav {
     flex-wrap: nowrap;
   }
@@ -638,7 +699,7 @@ section {
   }
 
   .trainers-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .footer-grid {
