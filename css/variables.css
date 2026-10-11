@@ -1,11 +1,9 @@
 /* ============================================
    DESIGN TOKENS
-   Provisional values. Update after the group
-   meeting to align with the shared visual look.
    ============================================ */
 
 :root {
-  /* --- Colors (PROVISIONAL) --- */
+  /* --- Colors --- */
   --color-bg: #ffffff;
   --color-bg-alt: #f5f5f5;
   --color-text: #1e1e1e;
@@ -24,7 +22,7 @@
 
   --color-border: #e0e0e0;
 
-  /* --- Typography (PROVISIONAL) --- */
+  /* --- Typography --- */
   --font-display: "Bricolage Grotesque", system-ui, sans-serif;
   --font-body: "DM Sans", system-ui, sans-serif;
 
