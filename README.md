@@ -26,7 +26,7 @@ but every line of code in this repository is written by me.
 
 ## Live preview
 
-<!-- Add link if deployed -->
+[https://rebecammed.github.io/FitnessStudioSite/](https://rebecammed.github.io/FitnessStudioSite/)
 
 ## How to view it
 
@@ -64,11 +64,11 @@ cd fitness-studio-site
 
 1. Navbar
 2. Hero
-3. About the studio
-4. Class schedule
-5. Trainers
-6. Membership tiers
-7. Contact
+3. Class schedule
+4. Trainers
+5. Membership tiers
+6. Contact
+7. About the studio
 8. Footer
 
 ## Tech decisions
@@ -87,8 +87,6 @@ cd fitness-studio-site
 
 ## Accessibility
 
-<!-- Fill out when the HTML is finished -->
-
 - Semantic landmarks: `<header>`, `<nav>`, `<main>`, `<footer>`
 - Single `<h1>` per page
 - Form labels associated with inputs via `for` / `id`
@@ -97,12 +95,9 @@ cd fitness-studio-site
 
 ## What I would improve with more time
 
-<!-- Fill out when the project is finished: -->
-
 - [ ] Add real photography and testimonials
 - [ ] Add a working contact form backend
 - [ ] Add keyboard navigation for the schedule tabs
-- [ ] Deploy with GitHub Pages for a live preview link
 
 ## Author
 
