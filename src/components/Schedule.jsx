@@ -11,7 +11,7 @@ export default function Schedule() {
   );
 
   return (
-    <section id="schedule" className="px-4 py-12 md:px-6 md:py-16">
+    <section id="schedule" className="px-4 py-20 md:px-6 md:py-28">
       <header className="max-w-2xl mx-auto mb-12 text-center">
         <h2 className="font-display text-3xl md:text-4xl mb-3">
           Class schedule
