@@ -4,6 +4,11 @@
 // Components import what they need and map over it.
 // ============================================
 
+import martaPhoto from "../assets/Marta_hiit_trainer.jpg";
+import diegoPhoto from "../assets/Diego_strength_trainer.jpg";
+import nereaPhoto from "../assets/Nerea_yoga_trainer.jpg";
+import ivanPhoto from "../assets/Ivan_cycling_trainer.jpg";
+
 // --- Navigation links ---
 export const navLinks = [
   { id: 1, label: "Classes", href: "#schedule" },
@@ -137,24 +142,28 @@ export const trainers = [
     name: "Marta R.",
     specialty: "HIIT",
     bio: "High-intensity and mobility specialist.",
+    photo: martaPhoto,
   },
   {
     id: 2,
     name: "Diego L.",
     specialty: "Strength",
     bio: "Functional strength and lifting technique.",
+    photo: diegoPhoto,
   },
   {
     id: 3,
     name: "Nerea P.",
     specialty: "Yoga",
     bio: "Dynamic yoga and conscious breathing.",
+    photo: nereaPhoto,
   },
   {
     id: 4,
     name: "Iván S.",
     specialty: "Cycling",
     bio: "Rhythm, endurance and a great playlist.",
+    photo: ivanPhoto,
   },
 ];
 
