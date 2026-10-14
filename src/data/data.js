@@ -13,8 +13,12 @@ export const navLinks = [
   { id: 5, label: "About", href: "#about" },
 ];
 
+// --- Days of the week ---
+export const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 // --- Class schedule ---
 export const classes = [
+  // Mon
   {
     id: 1,
     time: "07:00",
@@ -39,6 +43,7 @@ export const classes = [
     level: "Advanced",
     day: "Mon",
   },
+  // Tue
   {
     id: 4,
     time: "07:00",
@@ -54,6 +59,74 @@ export const classes = [
     trainer: "Nerea P.",
     level: "All levels",
     day: "Tue",
+  },
+  // Wed
+  {
+    id: 6,
+    time: "08:00",
+    name: "HIIT",
+    trainer: "Marta R.",
+    level: "Advanced",
+    day: "Wed",
+  },
+  {
+    id: 7,
+    time: "19:00",
+    name: "Strength",
+    trainer: "Diego L.",
+    level: "Intermediate",
+    day: "Wed",
+  },
+  // Thu
+  {
+    id: 8,
+    time: "07:00",
+    name: "Cycling",
+    trainer: "Iván S.",
+    level: "Advanced",
+    day: "Thu",
+  },
+  {
+    id: 9,
+    time: "17:00",
+    name: "Yoga",
+    trainer: "Nerea P.",
+    level: "All levels",
+    day: "Thu",
+  },
+  // Fri
+  {
+    id: 10,
+    time: "09:00",
+    name: "HIIT",
+    trainer: "Marta R.",
+    level: "All levels",
+    day: "Fri",
+  },
+  {
+    id: 11,
+    time: "18:00",
+    name: "Cycling",
+    trainer: "Iván S.",
+    level: "Intermediate",
+    day: "Fri",
+  },
+  // Sat
+  {
+    id: 12,
+    time: "10:00",
+    name: "Yoga",
+    trainer: "Nerea P.",
+    level: "All levels",
+    day: "Sat",
+  },
+  {
+    id: 13,
+    time: "12:00",
+    name: "Strength",
+    trainer: "Diego L.",
+    level: "All levels",
+    day: "Sat",
   },
 ];
 
