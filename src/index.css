@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #ffffff;
+  --color-bg-alt: #f5f5f5;
+  --color-text: #1e1e1e;
+  --color-text-muted: #6b6b6b;
+  --color-accent: #cad13f;
+  --color-accent-2: #6bab46;
+  --color-border: #e0e0e0;
+
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
