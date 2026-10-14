@@ -10,7 +10,7 @@ export const navLinks = [
   { id: 2, label: "Trainers", href: "#trainers" },
   { id: 3, label: "Prices", href: "#pricing" },
   { id: 4, label: "Contact", href: "#contact" },
-  { id: 4, label: "About", href: "#about" },
+  { id: 5, label: "About", href: "#about" },
 ];
 
 // --- Class schedule ---
