@@ -3,7 +3,7 @@ import TrainerCard from "./TrainerCard";
 
 export default function Trainers() {
   return (
-    <section id="trainers" className="bg-bg-alt px-4 py-20 md:px-6 md:py-28">
+    <section id="trainers" className=" px-4 py-20 md:px-6 md:py-28">
       <header className="max-w-2xl mx-auto mb-12 text-center">
         <h2 className="font-display text-3xl md:text-4xl mb-3">Our team</h2>
         <p className="text-text-muted text-sm">

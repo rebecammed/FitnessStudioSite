@@ -3,7 +3,7 @@ export default function ClassCard({ classItem }) {
     /**time and name occupy two columns, trainer and level one on the same row
      * and the button takes two columns on the fourth row
      * on tablet and desktop it's all one row with 5 columns*/
-    <article className="grid grid-cols-2 gap-3 p-4 border border-border rounded-xl items-center md:grid-cols-[80px_2fr_1fr_1fr_auto] md:gap-4 md:px-6">
+    <article className="grid grid-cols-2 gap-3 p-4 bg-bg border border-border rounded-xl items-center md:grid-cols-[80px_2fr_1fr_1fr_auto] md:gap-4 md:px-6">
       <time className="col-span-2 font-display font-bold text-text-muted text-sm md:col-span-1">
         {classItem.time}
       </time>
