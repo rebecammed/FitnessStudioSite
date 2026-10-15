@@ -1,3 +1,5 @@
+import StarRating from "./StarRating";
+
 export default function TrainerCard({ trainer }) {
   return (
     <article className="flex flex-col gap-2 p-6 border-2 border-accent rounded-xl bg-bg transition-all hover:-translate-y-1 hover:shadow-md">
@@ -14,6 +16,7 @@ export default function TrainerCard({ trainer }) {
       </span>
 
       <p className="text-text-muted text-sm">{trainer.bio}</p>
+      <StarRating />
     </article>
   );
 }
