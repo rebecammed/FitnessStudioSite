@@ -13,8 +13,11 @@
   --font-display: "Bricolage Grotesque", system-ui, sans-serif;
   --font-body: "DM Sans", system-ui, sans-serif;
 }
+:root {
+  --header-height: 73px;
+}
 
 html {
-  scroll-padding-top: 80px;
+  scroll-padding-top: var(--header-height);
   scroll-behavior: smooth;
 }

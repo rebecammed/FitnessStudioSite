@@ -8,7 +8,7 @@ export default function Header() {
      * The header sticks to the top, is in front of every item in the site
      * and has an inferior border
      */
-    <header className="sticky top-0 z-50 bg-bg border-b border-border">
+    <header className="sticky top-0 z-50 bg-bg border-b border-border min-h-[73px]">
       <nav
         aria-label="Main navigation menu"
         className="flex flex-wrap items-center justify-between gap-4 p-4 max-w-6xl mx-auto md:flex-nowrap"
