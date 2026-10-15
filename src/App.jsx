@@ -5,6 +5,7 @@ import Schedule from "./components/Schedule";
 import Trainers from "./components/Trainers";
 import Pricing from "./components/Pricing";
 import Contact from "./components/Contact";
+import About from "./components/About";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Trainers />
       <Pricing />
       <Contact />
+      <About />
     </>
   );
 }
