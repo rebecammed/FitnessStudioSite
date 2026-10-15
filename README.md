@@ -1,28 +1,14 @@
 # Fitness Studio Landing Page
 
-Static landing page for a fitness studio. Built with plain HTML5 and CSS3.
-
-<!--
-  To do:
-  - After the group meeting, update the studio name in the "About" section.
-  - Fill the "Tech decisions" once the CSS is finished.
-  - Add screenshots for Monday's presentation.
-  - Activate GitHub Pages
--->
+Responsive landing page for a fitness studio. Built with React, Vite and Tailwind CSS.
 
 ## About
 
-A single-page, responsive landing page for a fitness studio. It presents the
-class schedule, trainer bios as cards, and membership tiers as pricing cards.
+A single-page landing page for a fitness studio, originally built as a static
+HTML/CSS site and rebuilt with React + Tailwind in Week 2 of the practicum.
 
 The visual design is aligned with a group of 4 peers working on the same brief,
 but every line of code in this repository is written by me.
-
-<!--
-  After the meeting:
-  - Replace "a fitness studio" with the real name (ej. "PULSO Studio").
-  - If the team decides on a common claim, add it here.
--->
 
 ## Live preview
 
@@ -30,74 +16,115 @@ but every line of code in this repository is written by me.
 
 ## How to view it
 
-1. Clone the repository and open `index.html` in any modern browser.
-
 ```bash
-git clone https://github.com/rebecammed/FitnessStudioSite.git
-cd fitness-studio-site
+npm install
+npm run dev
 ```
 
-2. Open `index.html` in a browser or right-click it and choose "Open with" →
-   your browser.
+Then open http://localhost:5173 in a browser.
 
 ## Tech stack
 
-- **HTML5** — semantic landmarks, single `h1`, working anchor navigation
-- **CSS3** — Flexbox and Grid for different layouts, custom properties for
-  colors and spacing, mobile-first responsive
-- **No frameworks, no build step**
+- **React** — component-based UI with `useState` for interactive state
+- **Vite** — dev server and build tool
+- **Tailwind CSS v4** — utility-first styling with custom design tokens
 
 ## Project structure
 
 ```
 .
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Schedule.jsx
+│   │   ├── ClassCard.jsx
+│   │   ├── Trainers.jsx
+│   │   ├── TrainerCard.jsx
+│   │   ├── StarRating.jsx
+│   │   ├── Pricing.jsx
+│   │   ├── PriceCard.jsx
+│   │   ├── Contact.jsx
+│   │   ├── About.jsx
+│   │   └── Footer.jsx
+│   ├── data/
+│   │   └── data.js         # All site content as arrays of objects
+│   ├── assets/             # Background image and trainer photos
+│   ├── App.jsx             # Composes all sections
+│   ├── index.css           # Tailwind import and custom theme tokens
+│   └── main.jsx
 ├── index.html
-├── css/
-│   ├── variables.css    # design tokens (colors, spacing, typography)
-│   └── styles.css       # layout and components
-├── assets/              # images (if any)
-├── .gitignore
+├── package.json
+├── vite.config.js
 └── README.md
 ```
 
 ## Sections
 
-1. Navbar
-2. Hero
-3. Class schedule
-4. Trainers
+1. Header with a mobile hamburger menu
+2. Hero with background image
+3. Class schedule with a day filter
+4. Trainers with a star rating
 5. Membership tiers
-6. Contact
+6. Contact form
 7. About the studio
 8. Footer
 
+## State management
+
+Two components use `useState` to manage interactive state.
+
+### Day filter in Schedule
+
+`Schedule.jsx` uses `useState` to track the selected day, starting at `'Mon'`.
+The component renders one button per day. Clicking a button calls
+`setSelectedDay(day)`, which updates the state and triggers a re-render.
+On each render, the classes array is filtered with
+`classes.filter((c) => c.day === selectedDay)`, and only the matching rows
+are rendered.
+
+### StarRating controlled component
+
+`StarRating.jsx` is a small controlled component reused inside every
+`TrainerCard`. It has two pieces of state: `rating` (the confirmed value)
+and `hover` (the star the mouse is currently over). Each of the five stars
+is a button with `onClick` to set the rating and `onMouseEnter` /
+`onMouseLeave` to update the hover. The colour condition
+`star <= (hover || rating)` decides which stars are highlighted. Each
+`StarRating` instance has its own state, so rating one trainer doesn't
+affect the others.
+
 ## Tech decisions
 
-<!-- Fill out when the CSS is finished -->
-
-- **CSS Grid** used for: about values grid, schedule rows, trainers grid,
-  pricing grid, footer grid
-- **Flexbox** used for: navbar alignment, hero action buttons, card internals
-  (trainer cards, price cards), contact form, footer social links
-- **Design tokens** live in `css/variables.css` so the shared look with the
-  group can be adjusted in one place
-- **Mobile-first** approach: base styles target small screens, media queries
-  progressively enhance for tablet and desktop
-- **No horizontal scroll** verified at 375px, 768px and 1280px
+- **Component structure** — one component per section, plus small reusable
+  child components (`ClassCard`, `TrainerCard`, `PriceCard`, `StarRating`)
+  for repeated items.
+- **Data separated from JSX** — all content lives in `src/data/data.js` as
+  arrays of objects. Components import what they need and render it with `.map()`.
+- **Design tokens in Tailwind** — custom colours and fonts defined in
+  `src/index.css` via `@theme`, so a change in one place updates the whole site.
+- **Mobile-first responsive** — classes without a prefix target mobile;
+  `sm:`, `md:` and `lg:` progressively enhance for larger screens.
+- **No horizontal scroll** — verified at 375, 768 and 1280 pixels using
+  `document.documentElement.scrollWidth > document.documentElement.clientWidth`
+  in DevTools.
 
 ## Accessibility
 
 - Semantic landmarks: `<header>`, `<nav>`, `<main>`, `<footer>`
 - Single `<h1>` per page
-- Form labels associated with inputs via `for` / `id`
-- Navigation links use real anchors to section IDs
-- Focus styles for form fields (`:focus` with visible outline)
+- Form labels associated with inputs via `htmlFor` / `id`
+- Visible focus states on form fields
+- `aria-label` on icon-only buttons (hamburger menu, star rating)
+- `scroll-padding-top` on `html` to prevent the sticky header from covering
+  content when navigating with anchor links
 
 ## What I would improve with more time
 
-- [ ] Add real photography and testimonials
-- [ ] Add a working contact form backend
-- [ ] Add keyboard navigation for the schedule tabs
+- Connect the contact form to a backend
+- Persist the star ratings in local storage
+- Add keyboard navigation for the star rating (arrow keys)
+- Add a subtle fade-in animation on section scroll
 
 ## Author
 
@@ -106,4 +133,4 @@ Rebeca Martínez Medina
 
 ## License
 
-This project was built as part of a practicum program. All rights reserved.
+This project was built as part of a practicum program for Mayerfeld Consulting during october 2026. All rights reserved.
