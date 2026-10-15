@@ -6,6 +6,7 @@ import Trainers from "./components/Trainers";
 import Pricing from "./components/Pricing";
 import Contact from "./components/Contact";
 import About from "./components/About";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Pricing />
       <Contact />
       <About />
+      <Footer />
     </>
   );
 }
