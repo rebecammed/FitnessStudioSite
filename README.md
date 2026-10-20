@@ -12,7 +12,9 @@ but every line of code in this repository is written by me.
 
 ## Live preview
 
-[https://rebecammed.github.io/FitnessStudioSite/](https://rebecammed.github.io/FitnessStudioSite/)
+> ⏸️ **Temporarily unavailable.** During Week 3 the project is being split into a `client/` and a `server/` structure. The live demo will be back once the refactor is complete and deployed on Vercel (frontend) and Railway (backend).
+>
+> The previous version was hosted on GitHub Pages. It has been deactivated as part of this refactor.
 
 ## How to view it
 
