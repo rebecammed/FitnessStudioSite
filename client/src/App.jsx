@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useState } from "react";
+
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Schedule from "./components/Schedule";
@@ -9,6 +9,8 @@ import Contact from "./components/Contact";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
+import ScrollToHash from "./components/ScrollToHash";
+
 function Home() {
   return (
     <>
@@ -25,6 +27,7 @@ function Home() {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToHash />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
