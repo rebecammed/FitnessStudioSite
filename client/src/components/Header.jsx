@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 
 const navLinks = [
   { id: 1, label: "Classes", href: "#schedule" },
@@ -20,7 +21,7 @@ export default function Header() {
         className="flex flex-wrap items-center justify-between gap-4 p-4 max-w-6xl mx-auto md:flex-nowrap"
       >
         <a
-          href="#hero"
+          href="/#hero"
           className="font-display text-xl font-bold tracking-wider"
         >
           PULSO
@@ -34,21 +35,21 @@ export default function Header() {
         >
           {navLinks.map((link) => (
             <li key={link.id}>
-              <a
-                href={link.href}
+              <Link
+                to={`/${link.href}`}
                 className="text-sm font-medium transition-colors hover:text-accent-2"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         <a
-          href="#pricing"
+          href="/login"
           className="inline-flex items-center justify-center bg-accent text-text text-sm font-semibold px-4 py-2 rounded-lg transition-colors hover:bg-accent-2 hover:text-white"
         >
-          Bookings
+          Log in / Sign up
         </a>
 
         {/* Hamburger button - only visible on mobile */}
