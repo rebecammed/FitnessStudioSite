@@ -1,8 +1,29 @@
-import { useState } from "react";
-import { classes, days } from "../data/data";
+import { useEffect, useState } from "react";
+import { fetchApi } from "../lib/api";
 import ClassCard from "./ClassCard";
 
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 export default function Schedule() {
+  // 1. State to save the trainers
+  const [classes, setClasses] = useState([]);
+
+  // 2. State to know if the data is loading
+  const [loading, setLoading] = useState(true);
+
+  // 3. useEffect to ask for the data when the component is mounted
+  useEffect(() => {
+    fetchApi("/api/classes")
+      .then((data) => {
+        setClasses(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, []);
+
   /**Default selection is Monday, once you click on another day, that's the selected day. */
   const [selectedDay, setSelectedDay] = useState("Mon");
 
@@ -23,20 +44,24 @@ export default function Schedule() {
 
       {/* Day tabs */}
       <div className="flex gap-2 overflow-x-auto pb-2 mb-6 max-w-6xl mx-auto">
-        {days.map((day) => (
-          <button
-            key={day}
-            type="button"
-            onClick={() => setSelectedDay(day)}
-            className={`shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              selectedDay === day
-                ? "bg-accent text-text"
-                : "text-text-muted hover:bg-bg-alt hover:text-text"
-            }`}
-          >
-            {day}
-          </button>
-        ))}
+        {loading ? (
+          <p>Loading trainers...</p>
+        ) : (
+          days.map((day) => (
+            <button
+              key={day}
+              type="button"
+              onClick={() => setSelectedDay(day)}
+              className={`shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                selectedDay === day
+                  ? "bg-accent text-text"
+                  : "text-text-muted hover:bg-bg-alt hover:text-text"
+              }`}
+            >
+              {day}
+            </button>
+          ))
+        )}
       </div>
 
       {/* Class rows */}

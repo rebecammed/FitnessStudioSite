@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { navLinks } from "../data/data";
+
+const navLinks = [
+  { id: 1, label: "Classes", href: "#schedule" },
+  { id: 2, label: "Trainers", href: "#trainers" },
+  { id: 3, label: "Prices", href: "#pricing" },
+  { id: 4, label: "Contact", href: "#contact" },
+];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

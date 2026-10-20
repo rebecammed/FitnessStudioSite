@@ -1,4 +1,14 @@
-import { footerInfo } from "../data/data";
+const footerInfo = {
+  studio: {
+    name: "PULSO Studio",
+    address: "123 Example Street, Madrid",
+  },
+  hours: ["Mon–Fri: 6:00–22:00", "Sat–Sun: 8:00–20:00"],
+  social: [
+    { id: 1, label: "Instagram", href: "#" },
+    { id: 2, label: "TikTok", href: "#" },
+  ],
+};
 
 export default function Footer() {
   return (

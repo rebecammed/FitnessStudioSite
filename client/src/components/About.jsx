@@ -1,4 +1,20 @@
-import { values } from "../data/data";
+const values = [
+  {
+    id: 1,
+    title: "Personalised training",
+    text: "Small groups and real follow-up.",
+  },
+  {
+    id: 2,
+    title: "Real community",
+    text: "People who know each other and push each other.",
+  },
+  {
+    id: 3,
+    title: "Flexible schedule",
+    text: "Classes from 6:00 to 22:00, every day.",
+  },
+];
 
 export default function About() {
   return (

@@ -1,5 +1,3 @@
-import studioBg from "../assets/studio-bg.webp";
-
 export default function Hero() {
   return (
     <section
@@ -9,7 +7,7 @@ export default function Hero() {
       {/* Background image with overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${studioBg})` }}
+        style={{ backgroundImage: `url('/images/studio-bg.webp')` }}
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-text/60" aria-hidden="true" />

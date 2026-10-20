@@ -4,7 +4,7 @@ export default function TrainerCard({ trainer }) {
   return (
     <article className="flex flex-col gap-2 p-6 border-2 border-accent rounded-xl bg-bg transition-all hover:-translate-y-1 hover:shadow-md">
       <img
-        src={trainer.photo}
+        src={trainer.photoUrl}
         alt={trainer.name}
         className="aspect-square object-cover rounded-lg mb-2"
       />
