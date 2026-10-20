@@ -25,9 +25,7 @@ export const auth = betterAuth({
     expiresIn: 60 * 60 * 24 * 7,
     updateAge: 60 * 60 * 24,
   },
-  trustedOrigins: [
-    process.env.CLIENT_URL ?? "http://localhost:5137/FitnessStudioSite",
-  ],
+  trustedOrigins: [process.env.CLIENT_URL ?? "http://localhost:5137"],
   advanced: {
     defaultCookieAttributes: {
       sameSite: "lax",
