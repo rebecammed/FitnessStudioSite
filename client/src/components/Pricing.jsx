@@ -1,26 +1,61 @@
 import { useEffect, useState } from "react";
 import { fetchApi } from "../lib/api";
+import { authClient } from "../lib/auth-client";
 import PriceCard from "./PriceCard";
 
 export default function Pricing() {
-  // 1. State to save the trainers
+  const { data: session } = authClient.useSession();
+  // 1. States to save the memberships and the active plan
   const [memberships, setMemberships] = useState([]);
+  const [activePlanId, setActivePlanId] = useState(null);
 
   // 2. State to know if the data is loading
   const [loading, setLoading] = useState(true);
 
-  // 3. useEffect to ask for the data when the component is mounted
+  // 3. Get memberships and user's subscription
   useEffect(() => {
-    fetchApi("/api/memberships")
-      .then((data) => {
-        setMemberships(data);
+    const loadData = async () => {
+      try {
+        const membershipsData = await fetchApi("/api/memberships");
+        setMemberships(membershipsData);
+
+        if (session) {
+          const sub = await fetchApi("/api/subscriptions/me");
+          if (sub) setActivePlanId(sub.membershipId);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
+      }
+    };
+    loadData();
+  }, [session]); // It reruns if the user logs in or out
+
+  // 4. Handle subscription
+  const handleSubscribe = async (membershipId) => {
+    if (!session) {
+      // If there's no active session, redirect to login page
+      window.location.href = "/login";
+      return;
+    }
+
+    try {
+      await fetchApi("/api/subscriptions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ membershipId }),
       });
-  }, []);
+      setActivePlanId(membershipId); // Update the UI
+      window.dispatchEvent(
+        new CustomEvent("planUpdated", { detail: membershipId }),
+      ); // Personalized event to update the hero section
+    } catch (err) {
+      alert("Error subscribing. Please try again.");
+    }
+  };
+
+  if (loading) return <p className="text-center py-20">Loading...</p>;
 
   return (
     <section id="pricing" className="bg-bg-alt px-4 py-20 md:px-6 md:py-28">
@@ -37,7 +72,12 @@ export default function Pricing() {
           <p>Loading trainers...</p>
         ) : (
           memberships.map((membership) => (
-            <PriceCard key={membership.id} membership={membership} />
+            <PriceCard
+              key={membership.id}
+              membership={membership}
+              activePlanId={activePlanId}
+              onSubscribe={handleSubscribe}
+            />
           ))
         )}
       </div>

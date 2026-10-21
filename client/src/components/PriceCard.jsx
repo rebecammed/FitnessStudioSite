@@ -1,4 +1,5 @@
-export default function PriceCard({ membership }) {
+export default function PriceCard({ membership, activePlanId, onSubscribe }) {
+  const isCurrentPlan = activePlanId === membership.id;
   return (
     <article
       className={`relative flex flex-col gap-4 p-6 rounded-xl bg-bg shadow-sm ${
@@ -34,16 +35,22 @@ export default function PriceCard({ membership }) {
         ))}
       </ul>
 
-      <a
-        href="#contact"
-        className={`inline-flex items-center justify-center text-sm font-semibold px-4 py-2 rounded-lg transition-colors ${
-          membership.featured
-            ? "bg-accent text-text hover:bg-accent-2 hover:text-white"
-            : "border-2 border-text text-text hover:bg-accent-2 hover:text-white hover:border-accent-2"
-        }`}
-      >
-        Choose {membership.name}
-      </a>
+      {isCurrentPlan ? (
+        <div className="mt-auto inline-flex items-center justify-center bg-text text-white text-sm font-semibold px-4 py-2 rounded-lg">
+          ✓ Your current plan
+        </div>
+      ) : (
+        <button
+          onClick={() => onSubscribe(membership.id)}
+          className={`mt-auto inline-flex items-center justify-center text-sm font-semibold px-4 py-2 rounded-lg transition-colors ${
+            membership.featured
+              ? "bg-accent text-text hover:bg-accent-2 hover:text-white"
+              : "border-2 border-text text-text hover:bg-accent-2 hover:text-white hover:border-accent-2"
+          }`}
+        >
+          Choose {membership.name}
+        </button>
+      )}
     </article>
   );
 }
