@@ -1,7 +1,6 @@
 export default function Contact() {
   const handleSubmit = (event) => {
     event.preventDefault();
-    // No backend yet — Week 3
     console.log("Form submitted");
   };
 

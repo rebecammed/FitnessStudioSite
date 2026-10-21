@@ -12,18 +12,18 @@ export default function ScrollToHash() {
         const element = document.getElementById(id);
 
         if (element) {
-          // 1. Leemos la altura del header directamente de tu variable CSS
+          // 1. Read the header height from the CSS variable
           const headerHeightString = getComputedStyle(document.documentElement)
             .getPropertyValue("--header-height")
             .trim();
 
-          // 2. Convertimos "73px" a un número (73)
+          // 2. Turn 73px to an integer
           const headerHeight = parseInt(headerHeightString, 10) || 73; // 73 es un fallback por si falla
 
-          // 3. Calculamos la posición exacta + 1px de margen extra
+          // 3. Calculate exact position
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition =
-            elementPosition + window.scrollY - headerHeight - 1;
+            elementPosition + window.scrollY - headerHeight;
 
           window.scrollTo({
             top: offsetPosition,

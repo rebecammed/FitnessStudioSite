@@ -16,7 +16,6 @@ export default function Login() {
 
     try {
       if (isLogin) {
-        // Iniciar sesión
         const { data, error } = await authClient.signIn.email({
           email,
           password,
@@ -32,7 +31,7 @@ export default function Login() {
         if (error) throw new Error(error.message);
       }
 
-      // Si todo va bien, volvemos a la página principal
+      // If the action is succesfull we return to the landing page
       navigate("/");
     } catch (err) {
       setError(err.message || "Something went wrong");

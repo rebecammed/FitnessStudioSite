@@ -5,7 +5,7 @@ export default function PriceCard({ membership }) {
         membership.featured ? "border-2 border-accent" : "border border-border"
       }`}
     >
-      {/* Renderizamos el badge si existe en la base de datos */}
+      {/* Render the badge IF it's marked as true on the db */}
       {membership.badge && (
         <p className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-accent text-text text-sm font-semibold rounded-md whitespace-nowrap">
           {membership.badge}
@@ -23,7 +23,7 @@ export default function PriceCard({ membership }) {
       </p>
 
       <ul className="flex flex-col gap-2 text-sm text-text-muted grow">
-        {/* Ojo: features ahora viene como JSON desde Postgres, React lo lee como un array perfectamente */}
+        {/* Features is now type JSON from the database, React reads it as an array */}
         {membership.features.map((feature, index) => (
           <li key={index} className="flex items-start gap-2">
             <span className="text-accent-2 font-bold" aria-hidden="true">

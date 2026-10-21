@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { authClient } from "../lib/auth-client";
 
 const navLinks = [
   { id: 1, label: "Classes", href: "#schedule" },
@@ -10,6 +11,16 @@ const navLinks = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  // 1. Get the current session and pending stage
+  const { data: session, isPending } = authClient.useSession();
+
+  // 2. Sign out function
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    // Redirect to index when logged out
+    window.location.href = "/";
+  };
+
   return (
     /**
      * The header sticks to the top, is in front of every item in the site
@@ -45,12 +56,29 @@ export default function Header() {
           ))}
         </ul>
 
-        <a
-          href="/login"
-          className="inline-flex items-center justify-center bg-accent text-text text-sm font-semibold px-4 py-2 rounded-lg transition-colors hover:bg-accent-2 hover:text-white"
-        >
-          Log in / Sign up
-        </a>
+        <div className="flex items-center gap-2">
+          {/* 3. Lógica condicional del botón */}
+          {isPending ? (
+            // Mientras carga, no mostramos nada o un texto genérico para evitar parpadeos
+            <span className="text-sm text-text-muted">Loading...</span>
+          ) : session ? (
+            // Si HAY sesión -> Botón de Log out
+            <button
+              onClick={handleSignOut}
+              className="inline-flex items-center justify-center bg-text text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors hover:bg-text/90"
+            >
+              Log out
+            </button>
+          ) : (
+            // Si NO HAY sesión -> Botón de Log in (usando Link)
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center bg-accent text-text text-sm font-semibold px-4 py-2 rounded-lg transition-colors hover:bg-accent-2 hover:text-white"
+            >
+              Log in / Sign up
+            </Link>
+          )}
+        </div>
 
         {/* Hamburger button - only visible on mobile */}
         <button
