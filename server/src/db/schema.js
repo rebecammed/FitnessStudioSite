@@ -123,3 +123,11 @@ export const bookings = pgTable(
   },
   (table) => [uniqueIndex("unique_user_class").on(table.userId, table.classId)],
 );
+
+export const contactMessages = pgTable("contact_messages", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

@@ -14,6 +14,19 @@ export default function Login() {
     e.preventDefault();
     setError("");
 
+    // 1. Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    // 2. Validate password
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
     try {
       if (isLogin) {
         const { data, error } = await authClient.signIn.email({
@@ -56,7 +69,11 @@ export default function Login() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="flex flex-col gap-4"
+        >
           {!isLogin && (
             <div>
               <label
@@ -103,6 +120,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              minLength={8}
               className="w-full px-4 py-2 border border-border rounded-lg focus:outline-2 focus:outline-accent-2"
             />
           </div>
