@@ -69,7 +69,9 @@ export default function Pricing() {
       <div className="grid grid-cols-1 gap-6 max-w-5xl mx-auto md:grid-cols-3">
         {/* 4. We render the state */}
         {loading ? (
-          <p>Loading trainers...</p>
+          <div className="col-span-full flex justify-center items-center py-20">
+            <div className="w-10 h-10 border-4 border-border border-t-accent rounded-full animate-spin"></div>
+          </div>
         ) : (
           memberships.map((membership) => (
             <PriceCard

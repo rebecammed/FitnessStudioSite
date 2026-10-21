@@ -45,7 +45,9 @@ export default function Schedule() {
       {/* Day tabs */}
       <div className="flex gap-2 overflow-x-auto pb-2 mb-6 max-w-6xl mx-auto">
         {loading ? (
-          <p>Loading trainers...</p>
+          <div className="col-span-full flex justify-center items-center py-20">
+            <div className="w-10 h-10 border-4 border-border border-t-accent rounded-full animate-spin"></div>
+          </div>
         ) : (
           days.map((day) => (
             <button

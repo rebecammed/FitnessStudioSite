@@ -21,6 +21,7 @@ export default function Trainers() {
         setLoading(false);
       });
   }, []);
+
   return (
     <section id="trainers" className=" px-4 py-20 md:px-6 md:py-28">
       <header className="max-w-2xl mx-auto mb-12 text-center">
@@ -33,7 +34,9 @@ export default function Trainers() {
       <div className="grid grid-cols-1 gap-4 max-w-6xl mx-auto sm:grid-cols-2 lg:grid-cols-4">
         {/* 4. We render the state */}
         {loading ? (
-          <p>Loading trainers...</p>
+          <div className="col-span-full flex justify-center items-center py-20">
+            <div className="w-10 h-10 border-4 border-border border-t-accent rounded-full animate-spin"></div>
+          </div>
         ) : (
           trainers.map((trainer) => (
             <TrainerCard key={trainer.id} trainer={trainer} />
