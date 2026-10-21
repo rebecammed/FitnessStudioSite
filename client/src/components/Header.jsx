@@ -48,6 +48,7 @@ export default function Header() {
             <li key={link.id}>
               <Link
                 to={`/${link.href}`}
+                onClick={() => setIsOpen(false)}
                 className="text-sm font-medium transition-colors hover:text-accent-2"
               >
                 {link.label}
@@ -73,6 +74,7 @@ export default function Header() {
             // Si NO HAY sesión -> Botón de Log in (usando Link)
             <Link
               to="/login"
+              onClick={() => setIsOpen(false)}
               className="inline-flex items-center justify-center bg-accent text-text text-sm font-semibold px-4 py-2 rounded-lg transition-colors hover:bg-accent-2 hover:text-white"
             >
               Log in / Sign up
