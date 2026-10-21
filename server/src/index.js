@@ -12,6 +12,7 @@ import { classesRouter } from "./routes/classes.js";
 import { membershipsRouter } from "./routes/memberships.js";
 import { contactRouter } from "./routes/contact.js";
 import { ratingsRouter } from "./routes/ratings.js";
+import { subscriptionsRouter } from "./routes/subscriptions.js";
 
 const app = express();
 
@@ -30,11 +31,12 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 app.use(express.json());
 
 // My routes
-app.use("/api/trainers", trainersRouter);
 app.use("/api/classes", classesRouter);
-app.use("/api/memberships", membershipsRouter);
-app.use("/api/contact", contactRouter);
+app.use("/api/trainers", trainersRouter);
 app.use("/api/ratings", ratingsRouter);
+app.use("/api/memberships", membershipsRouter);
+app.use("/api/subscriptions", subscriptionsRouter);
+app.use("/api/contact", contactRouter);
 
 // This returns the actual timestamp to check if the server is alive
 app.get("/api/health", (_req, res) => {

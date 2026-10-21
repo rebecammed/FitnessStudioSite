@@ -1,5 +1,6 @@
 import {
   pgTable,
+  pgEnum,
   integer,
   text,
   jsonb,
@@ -129,5 +130,22 @@ export const contactMessages = pgTable("contact_messages", {
   name: text("name").notNull(),
   email: text("email").notNull(),
   message: text("message").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const subscriptionStatusEnum = pgEnum("subscription_status", [
+  "active",
+  "cancelled",
+]);
+
+export const subscriptions = pgTable("subscriptions", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  membershipId: text("membership_id")
+    .notNull()
+    .references(() => memberships.id, { onDelete: "restrict" }),
+  status: subscriptionStatusEnum("status").default("active").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
