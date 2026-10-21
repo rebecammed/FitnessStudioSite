@@ -11,7 +11,7 @@ export default function TrainerCard({ trainer }) {
 
       <div className="flex items-center justify-between gap-2">
         <h3 className="text-xl font-bold">{trainer.name}</h3>
-        <StarRating />
+        <StarRating trainerId={trainer.id} />
       </div>
 
       <span className="self-start inline-block px-2 py-1 bg-accent text-text text-sm font-semibold rounded-md">

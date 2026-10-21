@@ -11,6 +11,7 @@ import { trainersRouter } from "./routes/trainers.js";
 import { classesRouter } from "./routes/classes.js";
 import { membershipsRouter } from "./routes/memberships.js";
 import { contactRouter } from "./routes/contact.js";
+import { ratingsRouter } from "./routes/ratings.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/trainers", trainersRouter);
 app.use("/api/classes", classesRouter);
 app.use("/api/memberships", membershipsRouter);
 app.use("/api/contact", contactRouter);
+app.use("/api/ratings", ratingsRouter);
 
 // This returns the actual timestamp to check if the server is alive
 app.get("/api/health", (_req, res) => {
