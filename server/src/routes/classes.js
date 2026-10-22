@@ -1,14 +1,34 @@
 import { Router } from "express";
 import { eq } from "drizzle-orm";
 import { db } from "../db/index.js";
-import { classes } from "../db/schema.js";
+import { classes, trainers } from "../db/schema.js";
 
 export const classesRouter = Router();
 
 // GET all classes
 classesRouter.get("/", async (req, res) => {
   try {
-    const rows = await db.select().from(classes);
+    const rows = await db
+      .select({
+        // Select all of the fields from the class
+        id: classes.id,
+        time: classes.time,
+        name: classes.name,
+        level: classes.level,
+        day: classes.day,
+        totalSpots: classes.totalSpots,
+        availableSpots: classes.availableSpots,
+        // And nest the trainer object so the format is cleaner for the client
+        trainer: {
+          id: trainers.id,
+          name: trainers.name,
+          specialty: trainers.specialty,
+        },
+      })
+      .from(classes)
+      // LEFT JOIN so the classes that don't have a trainer appear as well
+      .leftJoin(trainers, eq(classes.trainerId, trainers.id));
+
     res.json(rows);
   } catch (error) {
     console.error(error);

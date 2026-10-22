@@ -13,6 +13,7 @@ import { membershipsRouter } from "./routes/memberships.js";
 import { contactRouter } from "./routes/contact.js";
 import { ratingsRouter } from "./routes/ratings.js";
 import { subscriptionsRouter } from "./routes/subscriptions.js";
+import { bookingsRouter } from "./routes/bookings.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(express.json());
 
 // My routes
 app.use("/api/classes", classesRouter);
+app.use("/api/bookings", bookingsRouter);
 app.use("/api/trainers", trainersRouter);
 app.use("/api/ratings", ratingsRouter);
 app.use("/api/memberships", membershipsRouter);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchApi } from "../lib/api";
+import { authClient } from "../lib/auth-client";
 import ClassCard from "./ClassCard";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -11,25 +12,49 @@ export default function Schedule() {
   // 2. State to know if the data is loading
   const [loading, setLoading] = useState(true);
 
-  // 3. useEffect to ask for the data when the component is mounted
+  const [userBookings, setUserBookings] = useState([]);
+  const { data: session } = authClient.useSession();
+
   useEffect(() => {
-    fetchApi("/api/classes")
-      .then((data) => {
-        setClasses(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setLoading(false);
-      });
-  }, []);
+    const loadData = async () => {
+      try {
+        const classesData = await fetchApi("/api/classes");
+        setClasses(classesData);
 
-  /**Default selection is Monday, once you click on another day, that's the selected day. */
+        if (session) {
+          const bookingsData = await fetchApi("/api/bookings/me");
+          setUserBookings(bookingsData);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, [session]);
+
+  // Reload the data after booking
+  const refreshData = async () => {
+    const classesData = await fetchApi("/api/classes");
+    setClasses(classesData);
+    if (session) {
+      const bookingsData = await fetchApi("/api/bookings/me");
+      setUserBookings(bookingsData);
+    }
+  };
+
+  // Default selection is Monday, once you click on another day, that's the selected day
   const [selectedDay, setSelectedDay] = useState("Mon");
+  const visibleClasses = classes.filter((c) => c.day === selectedDay);
 
-  const visibleClasses = classes.filter(
-    (classItem) => classItem.day === selectedDay,
-  );
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-32">
+        <div className="w-10 h-10 border-4 border-border border-t-accent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <section id="schedule" className="bg-bg-alt px-4 py-20 md:px-6 md:py-28">
@@ -44,33 +69,37 @@ export default function Schedule() {
 
       {/* Day tabs */}
       <div className="flex gap-2 overflow-x-auto pb-2 mb-6 max-w-6xl mx-auto">
-        {loading ? (
-          <div className="col-span-full flex justify-center items-center py-20">
-            <div className="w-10 h-10 border-4 border-border border-t-accent rounded-full animate-spin"></div>
-          </div>
-        ) : (
-          days.map((day) => (
-            <button
-              key={day}
-              type="button"
-              onClick={() => setSelectedDay(day)}
-              className={`shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                selectedDay === day
-                  ? "bg-accent text-text"
-                  : "text-text-muted hover:bg-bg-alt hover:text-text"
-              }`}
-            >
-              {day}
-            </button>
-          ))
-        )}
+        {days.map((day) => (
+          <button
+            key={day}
+            type="button"
+            onClick={() => setSelectedDay(day)}
+            className={`shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              selectedDay === day
+                ? "bg-accent text-text"
+                : "text-text-muted hover:bg-bg-alt hover:text-text"
+            }`}
+          >
+            {day}
+          </button>
+        ))}
       </div>
 
       {/* Class rows */}
       <div className="grid gap-3 max-w-6xl mx-auto">
-        {visibleClasses.map((classItem) => (
-          <ClassCard key={classItem.id} classItem={classItem} />
-        ))}
+        {visibleClasses.map((classItem) => {
+          // Check if this user already has a booking for this class
+          const isBooked = userBookings.some((b) => b.classId === classItem.id);
+
+          return (
+            <ClassCard
+              key={classItem.id}
+              classItem={classItem}
+              isBooked={isBooked}
+              onBook={refreshData}
+            />
+          );
+        })}
       </div>
     </section>
   );
