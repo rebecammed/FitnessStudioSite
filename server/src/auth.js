@@ -28,8 +28,8 @@ export const auth = betterAuth({
   trustedOrigins: [process.env.CLIENT_URL ?? "http://localhost:5173"],
   advanced: {
     defaultCookieAttributes: {
-      sameSite: "none",
-      secure: true,
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: process.env.NODE_ENV === "production",
     },
   },
 });
