@@ -1,138 +1,123 @@
 # Fitness Studio Landing Page
 
-Responsive landing page for a fitness studio. Built with React, Vite and Tailwind CSS.
+Full-stack application for a fitness studio. Built with React, Vite, and Tailwind CSS on the client, and Node.js, Express, Drizzle ORM, and PostgreSQL on the server.
 
 ## About
 
-A single-page landing page for a fitness studio, originally built as a static
-HTML/CSS site and rebuilt with React + Tailwind in Week 2 of the practicum.
+A complete booking and membership platform for a fitness studio. Originally built as a static HTML/CSS site (Week 1), rebuilt with React + Tailwind (Week 2), and finally connected to a real database and authentication system (Week 3).
 
-The visual design is aligned with a group of 4 peers working on the same brief,
-but every line of code in this repository is written by me.
+The visual design is aligned with a group of 4 peers working on the same brief, but every line of code in this repository is written by me.
 
 ## Live preview
 
-> ⏸️ **Temporarily unavailable.** During Week 3 the project is being split into a `client/` and a `server/` structure. The live demo will be back once the refactor is complete and deployed on Vercel (frontend) and Railway (backend).
->
-> The previous version was hosted on GitHub Pages. It has been deactivated as part of this refactor.
+- **Frontend:** [https://fitness-studio-site-mu.vercel.app](https://fitness-studio-site-mu.vercel.app)
+- **Backend API:** [https://fitnessstudiosite.onrender.com/api/health](https://fitnessstudiosite.onrender.com/api/health)
 
-## How to view it
-
-```bash
-npm install
-npm run dev
-```
-
-Then open http://localhost:5173 in a browser.
+_(Note: The backend is hosted on Render's free tier and may take ~30 seconds to wake up after a period of inactivity)._
 
 ## Tech stack
 
-- **React** — component-based UI with `useState` for interactive state
+**Client:**
+
+- **React** — component-based UI with Context for global state
 - **Vite** — dev server and build tool
-- **Tailwind CSS v4** — utility-first styling with custom design tokens
+- **Tailwind CSS v4** — utility-first styling
+- **React Router** — client-side routing with hash scrolling
+- **Better Auth** — authentication client
+
+**Server:**
+
+- **Node.js + Express** — REST API
+- **PostgreSQL (Neon)** — relational database
+- **Drizzle ORM** — type-safe SQL queries and schema management
+- **Better Auth** — session management and password hashing
 
 ## Project structure
 
-```
 .
-├── src/
-│   ├── components/
-│   │   ├── Header.jsx
-│   │   ├── Hero.jsx
-│   │   ├── Schedule.jsx
-│   │   ├── ClassCard.jsx
-│   │   ├── Trainers.jsx
-│   │   ├── TrainerCard.jsx
-│   │   ├── StarRating.jsx
-│   │   ├── Pricing.jsx
-│   │   ├── PriceCard.jsx
-│   │   ├── Contact.jsx
-│   │   ├── About.jsx
-│   │   └── Footer.jsx
-│   ├── data/
-│   │   └── data.js         # All site content as arrays of objects
-│   ├── assets/             # Background image and trainer photos
-│   ├── App.jsx             # Composes all sections
-│   ├── index.css           # Tailwind import and custom theme tokens
-│   └── main.jsx
-├── index.html
-├── package.json
-├── vite.config.js
+├── client/ # Frontend (Vercel)
+│ ├── src/
+│ │ ├── components/ # React components
+│ │ ├── lib/ # api.js, auth-client.js
+│ │ ├── App.jsx # Router and layout
+│ │ └── main.jsx
+│ └── vite.config.js
+├── server/ # Backend (Render)
+│ ├── src/
+│ │ ├── db/ # schema.js, seed.js, data files
+│ │ ├── routes/ # Express route handlers
+│ │ ├── auth.js # Better Auth configuration
+│ │ └── index.js # Express app entry point
+│ └── drizzle.config.js
 └── README.md
-```
 
-## Sections
+## Features
 
-1. Header with a mobile hamburger menu
-2. Hero with background image
-3. Class schedule with a day filter
-4. Trainers with a star rating
-5. Membership tiers
-6. Contact form
-7. About the studio
-8. Footer
+### User Authentication
 
-## State management
+- Signup, login, and logout using **Better Auth**.
+- Sessions are persisted in PostgreSQL and survive page reloads using secure cross-domain cookies.
+- The UI reacts to the auth state: the header shows "Log out", and the hero greets the user by name.
 
-Two components use `useState` to manage interactive state.
+### Interactive Class Schedule
 
-### Day filter in Schedule
+- Users can filter classes by day of the week.
+- **Booking system:** Authenticated users can book a class. The API checks for available spots, prevents duplicate bookings, and decrements the available spots in the database.
 
-`Schedule.jsx` uses `useState` to track the selected day, starting at `'Mon'`.
-The component renders one button per day. Clicking a button calls
-`setSelectedDay(day)`, which updates the state and triggers a re-render.
-On each render, the classes array is filtered with
-`classes.filter((c) => c.day === selectedDay)`, and only the matching rows
-are rendered.
+### Trainer Ratings
 
-### StarRating controlled component
+- Users can rate trainers from 1 to 5 stars.
+- Ratings are saved to the database using an `onConflictDoUpdate` (upsert) query, so a user can change their rating but can't create duplicates.
 
-`StarRating.jsx` is a small controlled component reused inside every
-`TrainerCard`. It has two pieces of state: `rating` (the confirmed value)
-and `hover` (the star the mouse is currently over). Each of the five stars
-is a button with `onClick` to set the rating and `onMouseEnter` /
-`onMouseLeave` to update the hover. The colour condition
-`star <= (hover || rating)` decides which stars are highlighted. Each
-`StarRating` instance has its own state, so rating one trainer doesn't
-affect the others.
+### Memberships & Subscriptions
 
-## Tech decisions
+- Users can subscribe to a membership tier.
+- The database uses a PostgreSQL `ENUM` for the subscription status ('active', 'cancelled').
+- When a user subscribes to a new plan, the previous active subscription is marked as cancelled.
 
-- **Component structure** — one component per section, plus small reusable
-  child components (`ClassCard`, `TrainerCard`, `PriceCard`, `StarRating`)
-  for repeated items.
-- **Data separated from JSX** — all content lives in `src/data/data.js` as
-  arrays of objects. Components import what they need and render it with `.map()`.
-- **Design tokens in Tailwind** — custom colours and fonts defined in
-  `src/index.css` via `@theme`, so a change in one place updates the whole site.
-- **Mobile-first responsive** — classes without a prefix target mobile;
-  `sm:`, `md:` and `lg:` progressively enhance for larger screens.
-- **No horizontal scroll** — verified at 375, 768 and 1280 pixels using
-  `document.documentElement.scrollWidth > document.documentElement.clientWidth`
-  in DevTools.
+### Contact Form
 
-## Accessibility
+- Messages are validated and saved directly to the PostgreSQL database.
 
-- Semantic landmarks: `<header>`, `<nav>`, `<main>`, `<footer>`
-- Single `<h1>` per page
-- Form labels associated with inputs via `htmlFor` / `id`
-- Visible focus states on form fields
-- `aria-label` on icon-only buttons (hamburger menu, star rating)
-- `scroll-padding-top` on `html` to prevent the sticky header from covering
-  content when navigating with anchor links
+## State Management (React)
+
+This project uses modern React patterns to share state across the app:
+
+- **Custom Events (`window.dispatchEvent`):** When a user subscribes to a plan, a custom event is fired. The `Hero` component listens for this event and updates the user's membership badge instantly without a page reload.
+- **`useState` and `useEffect`:** Used extensively for form handling, fetching API data, and managing loading states.
+
+## Database Schema
+
+The PostgreSQL database is managed with Drizzle ORM. The core tables are:
+
+- `user`, `session`, `account`, `verification` (managed by Better Auth)
+- `trainers`, `classes`, `memberships` (core business data)
+- `bookings` (records user reservations and links `users` to `classes`)
+- `ratings` (records user ratings for trainers, with a unique constraint on `userId` + `trainerId`)
+- `subscriptions` (records active memberships, linking `users` to `memberships`)
+- `contact_messages` (stores messages from the contact form)
+
+## Run locally (optional)
+
+If you prefer to run the project locally instead of using the live URLs:
+
+1. Set up your environment variables in `server/.env` and `client/.env` (see `.env.example` files).
+2. Run the database migrations and seed the data: `cd server && npm install && npm run db:push && npm run db:seed`
+3. Start the backend: `cd server && npm run dev`
+4. Start the frontend: `cd client && npm install && npm run dev`
 
 ## What I would improve with more time
 
-- Connect the contact form to a backend
-- Persist the star ratings in local storage
-- Add keyboard navigation for the star rating (arrow keys)
-- Add a subtle fade-in animation on section scroll
+- Add cancellation of bookings (returning the spot to the class counter).
+- Display the remaining spots visually on the class cards.
+- Add a user profile page to see a history of past bookings.
+- Implement automated testing (Vitest + Supertest).
 
 ## Author
 
 Rebeca Martínez Medina
-[github.com/rebecammed](https://github.com/rebecammed)
+[https://github.com/rebecammed] (https://github.com/rebecammed)
 
 ## License
 
-This project was built as part of a practicum program for Mayerfeld Consulting during october 2026. All rights reserved.
+This project was built as part of a practicum program for Mayerfeld Consulting during October 2026. All rights reserved.
