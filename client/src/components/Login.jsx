@@ -52,7 +52,7 @@ export default function Login() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-bg-alt px-4 py-12">
+    <section className="min-h-[calc(100vh-200px)] flex items-center justify-center bg-bg-alt px-4 py-20">
       <div className="w-full max-w-md bg-bg p-8 rounded-xl border border-border shadow-sm">
         <h1 className="font-display text-3xl mb-2 text-center">
           {isLogin ? "Welcome back" : "Create an account"}

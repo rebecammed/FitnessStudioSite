@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router";
 
 export default function ScrollToHash() {
-  const { hash } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
     if (hash) {
@@ -18,7 +18,7 @@ export default function ScrollToHash() {
             .trim();
 
           // 2. Turn 73px to an integer
-          const headerHeight = parseInt(headerHeightString, 10) || 73; // 73 es un fallback por si falla
+          const headerHeight = parseInt(headerHeightString, 10) || 73;
 
           // 3. Calculate exact position
           const elementPosition = element.getBoundingClientRect().top;
@@ -33,8 +33,14 @@ export default function ScrollToHash() {
       }, 300);
 
       return () => clearTimeout(timeout);
+    } else {
+      // 👇 SI NO HAY HASH (ej. entramos a /login), SUBIMOS ARRIBA DEL TODO
+      window.scrollTo({
+        top: 0,
+        behavior: "instant", // instant para que no se vea un scroll raro al cambiar de página
+      });
     }
-  }, [hash]);
+  }, [pathname, hash]);
 
   return null;
 }

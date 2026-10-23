@@ -32,10 +32,7 @@ export default function Header() {
         aria-label="Main navigation menu"
         className="flex flex-wrap items-center justify-between gap-4 p-4 max-w-6xl mx-auto md:flex-nowrap"
       >
-        <a
-          href="/#hero"
-          className="font-display text-xl font-bold tracking-wider"
-        >
+        <a href="/" className="font-display text-xl font-bold tracking-wider">
           PULSO
         </a>
 
