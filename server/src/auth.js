@@ -25,11 +25,11 @@ export const auth = betterAuth({
     expiresIn: 60 * 60 * 24 * 7,
     updateAge: 60 * 60 * 24,
   },
-  trustedOrigins: [process.env.CLIENT_URL ?? "http://localhost:5137"],
+  trustedOrigins: [process.env.CLIENT_URL ?? "http://localhost:5173"],
   advanced: {
     defaultCookieAttributes: {
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      sameSite: "none",
+      secure: true,
     },
   },
 });
