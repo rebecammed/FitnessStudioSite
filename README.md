@@ -34,22 +34,26 @@ _(Note: The backend is hosted on Render's free tier and may take ~30 seconds to 
 
 ## Project structure
 
+```text
 .
-├── client/ # Frontend (Vercel)
-│ ├── src/
-│ │ ├── components/ # React components
-│ │ ├── lib/ # api.js, auth-client.js
-│ │ ├── App.jsx # Router and layout
-│ │ └── main.jsx
-│ └── vite.config.js
-├── server/ # Backend (Render)
-│ ├── src/
-│ │ ├── db/ # schema.js, seed.js, data files
-│ │ ├── routes/ # Express route handlers
-│ │ ├── auth.js # Better Auth configuration
-│ │ └── index.js # Express app entry point
-│ └── drizzle.config.js
+├── client/                 # Frontend (React + Vite) - Deployed on Vercel
+│   ├── public/             # Static assets (images, favicon)
+│   └── src/
+│       ├── components/     # React UI components
+│       ├── lib/            # API fetch wrapper and Better Auth client
+│       ├── App.jsx         # Router and page layout
+│       └── main.jsx
+│
+├── server/                 # Backend (Express + Drizzle) - Deployed on Render
+│   ├── src/
+│   │   ├── db/             # Schema, seed script, and data files
+│   │   ├── routes/         # Express route handlers (API endpoints)
+│   │   ├── auth.js         # Better Auth configuration (sessions)
+│   │   └── index.js        # Express app entry point
+│   └── drizzle.config.js
+│
 └── README.md
+```
 
 ## Features
 
