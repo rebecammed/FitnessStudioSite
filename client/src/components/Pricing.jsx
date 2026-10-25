@@ -55,8 +55,6 @@ export default function Pricing() {
     }
   };
 
-  if (loading) return <p className="text-center py-20">Loading...</p>;
-
   return (
     <section id="pricing" className="bg-bg-alt px-4 py-20 md:px-6 md:py-28">
       <header className="max-w-2xl mx-auto mb-16 text-center">

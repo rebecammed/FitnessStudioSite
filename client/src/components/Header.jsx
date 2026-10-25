@@ -59,7 +59,7 @@ export default function Header() {
           {/* 3. Lógica condicional del botón */}
           {isPending ? (
             // Mientras carga, no mostramos nada o un texto genérico para evitar parpadeos
-            <span className="text-sm text-text-muted">Loading...</span>
+            <div className="h-9 w-24 bg-border/50 animate-pulse rounded-lg"></div>
           ) : session ? (
             // Si HAY sesión -> Botón de Log out
             <button
