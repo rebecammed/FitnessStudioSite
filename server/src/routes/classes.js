@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { eq } from "drizzle-orm";
+import { eq, asc } from "drizzle-orm";
 import { db } from "../db/index.js";
 import { classes, trainers } from "../db/schema.js";
 
@@ -27,7 +27,9 @@ classesRouter.get("/", async (req, res) => {
       })
       .from(classes)
       // LEFT JOIN so the classes that don't have a trainer appear as well
-      .leftJoin(trainers, eq(classes.trainerId, trainers.id));
+      .leftJoin(trainers, eq(classes.trainerId, trainers.id))
+      // ORDER BY ASC so the schedule stays visually easy to understand
+      .orderBy(asc(classes.time));
 
     res.json(rows);
   } catch (error) {
