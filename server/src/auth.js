@@ -27,9 +27,13 @@ export const auth = betterAuth({
   },
   trustedOrigins: [process.env.CLIENT_URL ?? "http://localhost:5173"],
   advanced: {
+    // for Vercel to trust what Render sends and for the APP to work in development too
     defaultCookieAttributes: {
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       secure: process.env.NODE_ENV === "production",
+    }, //for Better Auth to trust the IP sent by Render
+    ipAddress: {
+      ipAddressHeaders: ["x-forwarded-for"],
     },
   },
 });
