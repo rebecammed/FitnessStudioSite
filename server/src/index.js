@@ -14,6 +14,7 @@ import { contactRouter } from "./routes/contact.js";
 import { ratingsRouter } from "./routes/ratings.js";
 import { subscriptionsRouter } from "./routes/subscriptions.js";
 import { bookingsRouter } from "./routes/bookings.js";
+import { checkoutRouter } from "./routes/checkout.js";
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use("/api/trainers", trainersRouter);
 app.use("/api/ratings", ratingsRouter);
 app.use("/api/memberships", membershipsRouter);
 app.use("/api/subscriptions", subscriptionsRouter);
+app.use("/api/checkout", checkoutRouter);
 app.use("/api/contact", contactRouter);
 
 // This returns the actual timestamp to check if the server is alive
