@@ -1,3 +1,4 @@
+import { authClient } from "../lib/auth-client";
 export default function PriceCard({ membership, activePlanId }) {
   const isCurrentPlan = activePlanId === membership.id;
   const { data: session } = authClient.useSession();
