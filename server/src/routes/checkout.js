@@ -74,3 +74,26 @@ checkoutRouter.post("/", async (req, res) => {
     res.status(500).json({ error: "Failed to create checkout session" });
   }
 });
+
+// GET: Check the status of an order
+checkoutRouter.get("/status/:orderId", async (req, res) => {
+  try {
+    const { orderId } = req.params;
+
+    const [order] = await db
+      .select()
+      .from(orders)
+      .where(eq(orders.id, orderId))
+      .limit(1);
+
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    // Return only the status to prevent exposing vulnerable data
+    res.json({ status: order.status });
+  } catch (error) {
+    console.error("Status check error:", error);
+    res.status(500).json({ error: "Failed to check order status" });
+  }
+});

@@ -15,6 +15,7 @@ import { ratingsRouter } from "./routes/ratings.js";
 import { subscriptionsRouter } from "./routes/subscriptions.js";
 import { bookingsRouter } from "./routes/bookings.js";
 import { checkoutRouter } from "./routes/checkout.js";
+import { webhooksRouter } from "./routes/webhooks.js";
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.use(
 
 // better-auth needs the raw request body, so it's mounted before express.json().
 app.all("/api/auth/*splat", toNodeHandler(auth));
+
+app.use("/api/webhooks/stripe", webhooksRouter);
 
 // Parses incoming JSON requests so the API can read the body. Express built-in middleware
 app.use(express.json());
