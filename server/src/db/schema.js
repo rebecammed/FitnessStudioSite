@@ -149,3 +149,26 @@ export const subscriptions = pgTable("subscriptions", {
   status: subscriptionStatusEnum("status").default("active").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const orderStatusEnum = pgEnum("order_status", ["pending", "paid"]);
+
+export const orders = pgTable("orders", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  total: integer("total").notNull(), // In euros
+  status: orderStatusEnum("status").default("pending").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const orderItems = pgTable("order_items", {
+  id: text("id").primaryKey(),
+  orderId: text("order_id")
+    .notNull()
+    .references(() => orders.id, { onDelete: "cascade" }),
+  membershipId: text("membership_id")
+    .notNull()
+    .references(() => memberships.id, { onDelete: "restrict" }),
+  price: integer("price").notNull(), // Price at the time of order
+});
