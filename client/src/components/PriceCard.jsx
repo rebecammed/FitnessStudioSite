@@ -1,4 +1,6 @@
 import { authClient } from "../lib/auth-client";
+import { fetchApi } from "../lib/api";
+
 export default function PriceCard({ membership, activePlanId }) {
   const isCurrentPlan = activePlanId === membership.id;
   const { data: session } = authClient.useSession();
@@ -12,20 +14,18 @@ export default function PriceCard({ membership, activePlanId }) {
 
     try {
       // 2. POST request to the API
-      const response = await fetchApi("/api/checkout", {
+      const data = await fetchApi("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ membershipId: membership.id }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to create checkout session");
+      // 2. data is the object, so we access the url directly
+      if (data && data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("No URL returned from checkout");
       }
-
-      const data = await response.json();
-
-      // 3. Redirect to Stripe URL
-      window.location.href = data.url;
     } catch (error) {
       console.error("Checkout error:", error);
       alert("Something went wrong. Please try again.");
