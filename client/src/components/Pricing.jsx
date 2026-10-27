@@ -32,29 +32,6 @@ export default function Pricing() {
     loadData();
   }, [session]); // It reruns if the user logs in or out
 
-  // 4. Handle subscription
-  const handleSubscribe = async (membershipId) => {
-    if (!session) {
-      // If there's no active session, redirect to login page
-      window.location.href = "/login";
-      return;
-    }
-
-    try {
-      await fetchApi("/api/subscriptions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ membershipId }),
-      });
-      setActivePlanId(membershipId); // Update the UI
-      window.dispatchEvent(
-        new CustomEvent("planUpdated", { detail: membershipId }),
-      ); // Personalized event to update the hero section
-    } catch (err) {
-      alert("Error subscribing. Please try again.");
-    }
-  };
-
   return (
     <section id="pricing" className="bg-bg-alt px-4 py-20 md:px-6 md:py-28">
       <header className="max-w-2xl mx-auto mb-16 text-center">
@@ -76,7 +53,6 @@ export default function Pricing() {
               key={membership.id}
               membership={membership}
               activePlanId={activePlanId}
-              onSubscribe={handleSubscribe}
             />
           ))
         )}
