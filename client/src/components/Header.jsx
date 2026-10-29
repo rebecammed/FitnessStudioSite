@@ -61,19 +61,28 @@ export default function Header() {
             // Mientras carga, no mostramos nada o un texto genérico para evitar parpadeos
             <div className="h-9 w-24 bg-border/50 animate-pulse rounded-lg"></div>
           ) : session ? (
-            // Si HAY sesión -> Botón de Log out
-            <button
-              onClick={handleSignOut}
-              className="inline-flex items-center justify-center bg-text text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors hover:bg-text/90"
-            >
-              Log out
-            </button>
+            <>
+              <Link
+                to="/profile"
+                onClick={() => setIsOpen(false)}
+                className="inline-flex items-center justify-center bg-accent-2 text-text text-sm font-semibold px-4 py-2 rounded-lg transition-transform duration-200 hover:-translate-y-0.5"
+              >
+                Profile
+              </Link>
+
+              <button
+                onClick={handleSignOut}
+                className="inline-flex items-center justify-center bg-text text-white text-sm font-semibold px-4 py-2 rounded-lg transition-transform duration-200 hover:-translate-y-0.5"
+              >
+                Log out
+              </button>
+            </>
           ) : (
             // Si NO HAY sesión -> Botón de Log in (usando Link)
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
-              className="inline-flex items-center justify-center bg-accent text-text text-sm font-semibold px-4 py-2 rounded-lg transition-colors hover:bg-accent-2 hover:text-white"
+              className="inline-flex items-center justify-center bg-accent text-text text-sm font-semibold px-4 py-2 rounded-lg transition-transform duration-200 hover:-translate-y-0.5"
             >
               Log in / Sign up
             </Link>
