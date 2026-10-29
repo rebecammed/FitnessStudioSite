@@ -2,7 +2,7 @@ import { Router } from "express";
 import { randomUUID } from "crypto";
 import { eq, and } from "drizzle-orm";
 import { db } from "../db/index.js";
-import { bookings, classes } from "../db/schema.js";
+import { bookings, classes, trainers } from "../db/schema.js";
 import { auth } from "../auth.js";
 
 export const bookingsRouter = Router();
@@ -14,8 +14,18 @@ bookingsRouter.get("/me", async (req, res) => {
     if (!session) return res.status(401).json({ error: "Unauthorized" });
 
     const userBookings = await db
-      .select()
+      .select({
+        id: bookings.id,
+        createdAt: bookings.createdAt,
+        classId: classes.id,
+        className: classes.name,
+        time: classes.time,
+        day: classes.day,
+        trainerName: trainers.name,
+      })
       .from(bookings)
+      .leftJoin(classes, eq(bookings.classId, classes.id))
+      .leftJoin(trainers, eq(classes.trainerId, trainers.id))
       .where(eq(bookings.userId, session.user.id));
 
     res.json(userBookings);
@@ -87,5 +97,44 @@ bookingsRouter.post("/", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to book class" });
+  }
+});
+
+bookingsRouter.delete("/:id", async (req, res) => {
+  try {
+    const session = await auth.api.getSession({ headers: req.headers });
+    if (!session) return res.status(401).json({ error: "Unauthorized" });
+
+    const { id } = req.params;
+
+    // 1. Get the booking and make sure the userID is the same
+    const [booking] = await db
+      .select()
+      .from(bookings)
+      .where(and(eq(bookings.id, id), eq(bookings.userId, session.user.id)))
+      .limit(1);
+
+    if (!booking) return res.status(404).json({ error: "Booking not found" });
+
+    // 2. Delete the booking
+    await db.delete(bookings).where(eq(bookings.id, id));
+
+    // 3. Return the spot to the class
+    const [classToUpdate] = await db
+      .select()
+      .from(classes)
+      .where(eq(classes.id, booking.classId))
+      .limit(1);
+    if (classToUpdate) {
+      await db
+        .update(classes)
+        .set({ availableSpots: classToUpdate.availableSpots + 1 })
+        .where(eq(classes.id, booking.classId));
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to cancel booking" });
   }
 });
