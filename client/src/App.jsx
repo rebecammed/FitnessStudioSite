@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import ScrollToHash from "./components/ScrollToHash";
 import Success from "./components/Success";
+import Profile from "./components/Profile";
 
 function Home() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/success" element={<Success />} />
       </Routes>
       <Footer />
