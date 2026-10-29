@@ -79,6 +79,13 @@ _(Note: The backend is hosted on Render's free tier and may take ~30 seconds to 
 - The database uses a PostgreSQL `ENUM` for the subscription status ('active', 'cancelled').
 - When a user subscribes to a new plan, the previous active subscription is marked as cancelled.
 
+### Real Payments (Stripe Checkout)
+
+- Users can purchase memberships using **Stripe Checkout** in test mode.
+- The backend creates an order (status: `pending`) and generates a secure Stripe session.
+- A verified **Stripe Webhook** listens for the `checkout.session.completed` event. It's the only thing authorized to mark the order as `paid` and activate the user's subscription.
+- The frontend `/success` page polls the backend to confirm the order status before showing the final success message.
+
 ### Contact Form
 
 - Messages are validated and saved directly to the PostgreSQL database.
