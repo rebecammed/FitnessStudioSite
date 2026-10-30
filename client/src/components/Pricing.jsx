@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router";
 import { fetchApi } from "../lib/api";
 import { authClient } from "../lib/auth-client";
