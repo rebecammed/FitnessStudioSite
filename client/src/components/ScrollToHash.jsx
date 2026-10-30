@@ -30,7 +30,7 @@ export default function ScrollToHash() {
             behavior: "smooth",
           });
         }
-      }, 1000);
+      }, 300);
 
       return () => clearTimeout(timeout);
     } else {

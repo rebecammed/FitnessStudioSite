@@ -62,7 +62,8 @@ checkoutRouter.post("/", async (req, res) => {
       ],
       mode: "payment",
       success_url: `${process.env.CLIENT_URL}/success?order_id=${orderId}`,
-      cancel_url: `${process.env.CLIENT_URL}/#pricing`,
+      // Cámbialo a esto:
+      cancel_url: `${process.env.CLIENT_URL}/?payment=cancelled#pricing`,
       client_reference_id: orderId, // To identify the order in the webhook
       customer_email: session.user.email,
     });
