@@ -30,11 +30,10 @@ export default function ScrollToHash() {
             behavior: "smooth",
           });
         }
-      }, 300);
+      }, 1000);
 
       return () => clearTimeout(timeout);
     } else {
-      // 👇 SI NO HAY HASH (ej. entramos a /login), SUBIMOS ARRIBA DEL TODO
       window.scrollTo({
         top: 0,
         behavior: "instant", // instant para que no se vea un scroll raro al cambiar de página
