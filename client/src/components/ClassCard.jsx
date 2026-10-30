@@ -42,9 +42,18 @@ export default function ClassCard({ classItem, isBooked, onBook }) {
 
       <p className="text-sm">{classItem.trainer?.name || "Trainer TBD"}</p>
 
-      <p className="text-sm text-text-muted text-right md:text-left">
-        {classItem.level}
-      </p>
+      <div className="text-sm md:text-left text-right flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+        <p className="text-text-muted">{classItem.level}</p>
+
+        {/* Lógica para pintar en rojo si quedan 3 o menos plazas */}
+        <p
+          className={`text-xs font-semibold ${
+            classItem.availableSpots <= 3 ? "text-red-500" : "text-accent-2"
+          }`}
+        >
+          {classItem.availableSpots} spots left
+        </p>
+      </div>
 
       {/* Button / State area */}
       <div className="col-span-2 md:col-span-1 flex flex-col items-end justify-center">
