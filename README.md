@@ -15,6 +15,8 @@ The visual design is aligned with a group of 4 peers working on the same brief, 
 
 _(Note: The backend is hosted on Render's free tier and may take ~30 seconds to wake up after a period of inactivity. The Stripe integration is in **test mode**, so no real money is processed)._
 
+https://github.com/user-attachments/assets/36fe4d5f-09cd-4af4-9c96-fd05fe4a1475
+
 ## Tech stack
 
 **Client:**
